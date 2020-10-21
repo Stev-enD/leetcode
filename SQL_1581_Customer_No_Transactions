@@ -1,0 +1,13 @@
+# Write your MySQL query statement below
+# Write a SQL query to find the IDs of the users who visited without making any transactions and the number of times they made these types of visits
+# Return result table sorted in any order
+
+SELECT v.customer_id,
+SUM(CASE WHEN transaction_id IS NULL THEN 1 ELSE 0 END) count_no_trans
+FROM visits v LEFT JOIN
+transactions t ON t.visit_id = v.visit_id 
+WHERE transaction_id IS NULL
+GROUP BY v.customer_id
+
+# 900 ms
+# 0B
